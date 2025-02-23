@@ -36,7 +36,7 @@ echo ██║███╗██║██╔══██║██║   ██║
 echo ╚███╔███╔╝██║  ██║╚██████╔╝██║  ██║██║ ╚═╝ ██║██║
 echo  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
 set /p "pass=Enter your password to unlock your folder: "
-if "%pass%" NEQ "huwamee?" goto FAIL
+if "%pass%" NEQ "your password here" goto FAIL
 attrib -h -s "%lockName%"
 ren "%lockName%" "%folder%"
 echo Folder unlocked successfully.
