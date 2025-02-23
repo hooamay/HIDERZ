@@ -1,4 +1,4 @@
-# FolderFucvker Script
+# FolderFuvker Script
 
 This is a simple batch script used to lock and unlock a folder on Windows. The folder will become hidden and inaccessible to others unless they have the correct password to unlock it.
 
