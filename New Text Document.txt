@@ -51,4 +51,26 @@ echo Folder locked successfully.
 goto END
 
 :UNLOCK
-echo ██╗    ██╗██╗  ██╗ ██████╗  █
+echo ██╗    ██╗██╗  ██╗ ██████╗  █████╗ ███╗   ███╗██╗
+echo ██║    ██║██║  ██║██╔═══██╗██╔══██╗████╗ ████║██║
+echo ██║ █╗ ██║███████║██║   ██║███████║██╔████╔██║██║
+echo ██║███╗██║██╔══██║██║   ██║██╔══██║██║╚██╔╝██║██║
+echo ╚███╔███╔╝██║  ██║╚██████╔╝██║  ██║██║ ╚═╝ ██║██║
+echo  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
+set /p "pass=Enter your password to unlock your folder: "
+if "%pass%" NEQ "huwamee?" goto FAIL
+attrib -h -s "%lockName%"
+ren "%lockName%" "%folder%"
+echo Folder unlocked successfully.
+goto END
+
+:FAIL
+echo Invalid password. Access denied.
+goto END
+
+:MDPrivate
+md "%folder%"
+echo Folder "%folder%" created successfully.
+goto END
+
+:END
