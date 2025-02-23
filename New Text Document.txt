@@ -1,33 +1,54 @@
 @ECHO OFF
-if EXIST "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}" goto UNLOCK
-if NOT EXIST Private goto MDPrivate
+REM BFCPEOPTIONSTART
+REM Advanced BAT to EXE Converter www.BatToExeConverter.com
+REM BFCPEEXE=C:\Users\huwam\Downloads\hello.exe
+REM BFCPEICON=C:\Users\huwam\Downloads\skull.ico
+REM BFCPEICONINDEX=-1
+REM BFCPEEMBEDDISPLAY=0
+REM BFCPEEMBEDDELETE=1
+REM BFCPEADMINEXE=0
+REM BFCPEINVISEXE=0
+REM BFCPEVERINCLUDE=0
+REM BFCPEVERVERSION=1.0.0.0
+REM BFCPEVERPRODUCT=Product Name
+REM BFCPEVERDESC=Product Description
+REM BFCPEVERCOMPANY=Your Company
+REM BFCPEVERCOPYRIGHT=Copyright Info
+REM BFCPEWINDOWCENTER=1
+REM BFCPEDISABLEQE=0
+REM BFCPEWINDOWHEIGHT=25
+REM BFCPEWINDOWWIDTH=80
+REM BFCPEWTITLE=Window Title
+REM BFCPEOPTIONEND
+@ECHO OFF
+:: Set the code page to UTF-8, but suppress the output
+chcp 65001 >nul
+
+SET "folder=Private"
+SET "lockName=Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
+
+:: Check if folder is locked
+if EXIST "%lockName%" goto UNLOCK
+if NOT EXIST "%folder%" goto MDPrivate
+
 :CONFIRM
-echo Are you sure you want to lock this folder? (Y/N)
-set/p "cho=>"
-if %cho%==Y goto LOCK
-if %cho%==y goto LOCK
-if %cho%==n goto END
-if %cho%==N goto END
-echo Invalid choice.
+echo ██╗    ██╗██╗  ██╗ ██████╗  █████╗ ███╗   ███╗██╗
+echo ██║    ██║██║  ██║██╔═══██╗██╔══██╗████╗ ████║██║
+echo ██║ █╗ ██║███████║██║   ██║███████║██╔████╔██║██║
+echo ██║███╗██║██╔══██║██║   ██║██╔══██║██║╚██╔╝██║██║
+echo ╚███╔███╔╝██║  ██║╚██████╔╝██║  ██║██║ ╚═╝ ██║██║
+echo  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
+set /p "cho=Are you sure you want to lock this folder? (Y/N): "
+if /I "%cho%"=="Y" goto LOCK
+if /I "%cho%"=="N" goto END
+echo Invalid choice. Please enter Y or N.
 goto CONFIRM
+
 :LOCK
-ren Private "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
-attrib +h +s "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
-echo Folder locked
-goto End
+ren "%folder%" "%lockName%"
+attrib +h +s "%lockName%"
+echo Folder locked successfully.
+goto END
+
 :UNLOCK
-echo Enter your password to unlock your folder.
-set/p "pass=>"
-if NOT %pass%== helloworld goto FAIL
-attrib -h -s "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
-ren "Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}" Private
-echo Folder Unlocked successfully
-goto End
-:FAIL
-echo Invalid password
-goto end
-:MDPrivate
-md Private
-echo Private created successfully
-goto End
-:End
+echo ██╗    ██╗██╗  ██╗ ██████╗  █
