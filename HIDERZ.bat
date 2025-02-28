@@ -9,7 +9,6 @@ SET "lockName=Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
 if EXIST "%lockName%" goto UNLOCK
 if NOT EXIST "%folder%" goto MDPrivate
 
-:: HEADER (Updated Banner)
 ECHO.
 ECHO ██╗  ██╗██╗██████╗ ███████╗██████╗ ███████╗
 ECHO ██║  ██║██║██╔══██╗██╔════╝██╔══██╗╚══███╔╝
@@ -17,6 +16,7 @@ ECHO ███████║██║██║  ██║█████╗  �
 ECHO ██╔══██║██║██║  ██║██╔══╝  ██╔══██╗ ███╔╝  
 ECHO ██║  ██║██║██████╔╝███████╗██║  ██║███████╗
 ECHO ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
+ECHO DEVELOPED BY: whoami
 ECHO.
 
 set /p "cho=Are you sure you want to hide this folder? (Y/N): "
@@ -32,6 +32,7 @@ echo Folder locked successfully.
 goto END
 
 :UNLOCK
+
 ECHO.
 ECHO ██╗  ██╗██╗██████╗ ███████╗██████╗ ███████╗
 ECHO ██║  ██║██║██╔══██╗██╔════╝██╔══██╗╚══███╔╝
@@ -39,9 +40,11 @@ ECHO ███████║██║██║  ██║█████╗  �
 ECHO ██╔══██║██║██║  ██║██╔══╝  ██╔══██╗ ███╔╝  
 ECHO ██║  ██║██║██████╔╝███████╗██║  ██║███████╗
 ECHO ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
+ECHO DEVELOPED BY: whoami
 ECHO.
+
 set /p "pass=Enter your password to unhide your folder: "
-if "%pass%" NEQ "123" goto FAIL
+if "%pass%" NEQ "huwamee?" goto FAIL
 attrib -h -s "%lockName%"
 ren "%lockName%" "%folder%"
 echo Folder unlocked successfully.
