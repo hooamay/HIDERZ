@@ -36,7 +36,6 @@ This is a simple batch script used to lock and unlock a folder on Windows. The f
 
 ```batch
 @ECHO OFF
-:: Set the code page to UTF-8, but suppress the output
 chcp 65001 >nul
 color a
 SET "folder=Private"
@@ -63,13 +62,14 @@ echo Invalid choice. Please enter Y or N.
 goto CONFIRM
 
 :LOCK
-ren "%folder%" "%lockName%"
-attrib +h +s "%lockName%"
+echo Locking folder...
+if NOT EXIST "%folder%" goto MDPrivate
+ren "%folder%" "%lockName%" || echo ERROR: Failed to rename folder!
+attrib +h +s "%lockName%" || echo ERROR: Failed to hide folder!
 echo Folder locked successfully.
 goto END
 
 :UNLOCK
-
 ECHO.
 ECHO ██╗  ██╗██╗██████╗ ███████╗██████╗ ███████╗
 ECHO ██║  ██║██║██╔══██╗██╔════╝██╔══██╗╚══███╔╝
@@ -80,10 +80,11 @@ ECHO ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝
 ECHO DEVELOPED BY: whoami
 ECHO.
 
+setlocal enabledelayedexpansion
 set /p "pass=Enter your password to unhide your folder: "
-if "%pass%" NEQ "huwamee?" goto FAIL
-attrib -h -s "%lockName%"
-ren "%lockName%" "%folder%"
+if "!pass!" NEQ "huwamee?" goto FAIL
+attrib -h -s "%lockName%" || echo ERROR: Failed to unhide folder!
+ren "%lockName%" "%folder%" || echo ERROR: Failed to rename folder!
 echo Folder unlocked successfully.
 goto END
 
@@ -92,8 +93,9 @@ echo Invalid password. Access denied.
 goto END
 
 :MDPrivate
-md "%folder%"
+md "%folder%" || echo ERROR: Failed to create folder!
 echo Folder "%folder%" created successfully.
 goto END
 
 :END
+
