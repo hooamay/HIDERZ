@@ -69,10 +69,6 @@ It is intended for basic privacy, not high-security purposes.
 Anyone familiar with batch scripting or system internals can potentially bypass this.
 Use responsibly.
 
-### Developer
-Developed by huwamee
-- Suggestions and forks welcome — feel free to expand this idea!
-
 ### 📜 License
 MIT License © 2025 huwamee
 
@@ -93,3 +89,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+### Developed by huwamee
+- Suggestions and forks welcome — feel free to expand this idea!
