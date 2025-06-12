@@ -1,101 +1,95 @@
-# HIDERZ Script
+<p align="center">
+  <img src="folder.png" alt="HIDERZ Logo" width="80" />
+</p>
 
-This is a simple batch script used to lock and unlock a folder on Windows. The folder will become hidden and inaccessible to others unless they have the correct password to unlock it.
+<h1 align="center">HIDERZ v1.0</h1>
 
-## How to Use
+<p align="center">
+  A lightweight Windows batch script that hides and locks folders with a password.<br>
+  Designed for local privacy, quick protection, and no external tools — all within a simple terminal prompt.
+</p>
 
-### 1. Clone or Download the Script
-   - Download or clone the batch script to your computer.
+<hr>
 
-### 2. Set Your Password
-   - Open the script (`lock_folder.bat`) in any text editor.
-   - Replace `"your password here"` with your desired password in the line below:
-     ```batch
-     if "%pass%" NEQ "your password here" goto FAIL
-     ```
+## 🛠️ Features
 
-### 3. Run the Script
-   - Double-click the `.bat` file to run it. 
-   - When prompted, choose **Y** to lock the folder or **N** if you don't want to lock it.
+- **Lock & Hide Any Folder**  
+  Quickly hides a folder and makes it inaccessible without the correct password.
 
-### 4. Locking the Folder
-   - When the folder is locked, it will become hidden and inaccessible until it is unlocked with the correct password.
+- **Password-Protected Access**  
+  Only users who enter the correct password can unlock and reveal the folder.
 
-### 5. Unlocking the Folder
-   - To unlock the folder, run the script again and enter the correct password when prompted.
+- **System Attribute Cloaking**  
+  Folders are renamed and marked with `+s +h` to hide them from Explorer.
 
-## How It Works
+- **Zero Dependencies**  
+  No installation or admin access required — pure `.bat` file functionality.
 
-1. **Locking the Folder**  
-   - When you choose to lock the folder, the script renames the folder to a system folder name and hides it by applying system and hidden attributes.
+- **Easy Setup & Use**  
+  Just set your password once inside the script, then lock or unlock anytime.
 
-2. **Unlocking the Folder**  
-   - To unlock the folder, run the script again, enter the correct password, and the script will restore the folder to its original state.
+---
 
-## Full Script Code
+## ⚙️ How to Use
 
-```batch
-@ECHO OFF
-chcp 65001 >nul
-color a
-SET "folder=Private"
-SET "lockName=Control Panel.{21EC2020-3AEA-1069-A2DD-08002B30309D}"
+### 🧰 Requirements
+- Any Windows OS (tested on Windows 10/11)
+- Basic file system permissions
+- Console (CMD or PowerShell)
 
-:: Check if folder is locked
-if EXIST "%lockName%" goto UNLOCK
-if NOT EXIST "%folder%" goto MDPrivate
+### 🚀 Installation
+1. Download or clone this repo.
+2. Open `lock_folder.bat` in a text editor.
+3. Find this line:
+   ```batch
+   if "%pass%" NEQ "your password here" goto FAIL
+4. Replace "your password here" with your desired password.
+5. Save the file and double-click to run.
 
-ECHO.
-ECHO ██╗  ██╗██╗██████╗ ███████╗██████╗ ███████╗
-ECHO ██║  ██║██║██╔══██╗██╔════╝██╔══██╗╚══███╔╝
-ECHO ███████║██║██║  ██║█████╗  ██████╔╝  ███╔╝ 
-ECHO ██╔══██║██║██║  ██║██╔══╝  ██╔══██╗ ███╔╝  
-ECHO ██║  ██║██║██████╔╝███████╗██║  ██║███████╗
-ECHO ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
-ECHO DEVELOPED BY: whoami
-ECHO.
+### 🔢 Menu Options
+When running the script:
+- First Run:
+Creates a folder named Private if it doesn't exist.
+- Lock Folder:
+When Private exists, run the script → Press Y to lock it.
+It becomes hidden and inaccessible.
+- Unlock Folder:
+Run the script again → Enter the password correctly → Folder is restored.
+- Cancel:
+At any input, type N or close the window to cancel.
 
-set /p "cho=Are you sure you want to hide this folder? (Y/N): "
-if /I "%cho%"=="Y" goto LOCK
-if /I "%cho%"=="N" goto END
-echo Invalid choice. Please enter Y or N.
-goto CONFIRM
+### 💡 Usage Examples
+- Lock files from public view on shared PCs
+- Temporarily hide project folders or sensitive documents
+- Simple script-based protection without needing 3rd-party apps+
 
-:LOCK
-echo Locking folder...
-if NOT EXIST "%folder%" goto MDPrivate
-ren "%folder%" "%lockName%" || echo ERROR: Failed to rename folder!
-attrib +h +s "%lockName%" || echo ERROR: Failed to hide folder!
-echo Folder locked successfully.
-goto END
+### ⚠️ Disclaimer
+This script uses Windows folder hiding techniques, not encryption.
+It is intended for basic privacy, not high-security purposes.
+Anyone familiar with batch scripting or system internals can potentially bypass this.
+Use responsibly.
 
-:UNLOCK
-ECHO.
-ECHO ██╗  ██╗██╗██████╗ ███████╗██████╗ ███████╗
-ECHO ██║  ██║██║██╔══██╗██╔════╝██╔══██╗╚══███╔╝
-ECHO ███████║██║██║  ██║█████╗  ██████╔╝  ███╔╝ 
-ECHO ██╔══██║██║██║  ██║██╔══╝  ██╔══██╗ ███╔╝  
-ECHO ██║  ██║██║██████╔╝███████╗██║  ██║███████╗
-ECHO ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
-ECHO DEVELOPED BY: whoami
-ECHO.
+### Developer
+Developed by huwamee
+Suggestions and forks welcome — feel free to expand this idea!
 
-setlocal enabledelayedexpansion
-set /p "pass=Enter your password to unhide your folder: "
-if "!pass!" NEQ "huwamee?" goto FAIL
-attrib -h -s "%lockName%" || echo ERROR: Failed to unhide folder!
-ren "%lockName%" "%folder%" || echo ERROR: Failed to rename folder!
-echo Folder unlocked successfully.
-goto END
+### 📜 License
+MIT License © 2025 huwamee
 
-:FAIL
-echo Invalid password. Access denied.
-goto END
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-:MDPrivate
-md "%folder%" || echo ERROR: Failed to create folder!
-echo Folder "%folder%" created successfully.
-goto END
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-:END
-
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
