@@ -71,7 +71,7 @@ Use responsibly.
 
 ### Developer
 Developed by huwamee
-Suggestions and forks welcome — feel free to expand this idea!
+- Suggestions and forks welcome — feel free to expand this idea!
 
 ### 📜 License
 MIT License © 2025 huwamee
